@@ -434,10 +434,6 @@
     XLFormSectionDescriptor * multivaluedFormSection = formRow.sectionDescriptor;
     XLFormRowDescriptor * formRowDescriptor = [self formRowFormMultivaluedFormSection:multivaluedFormSection];
     [multivaluedFormSection addFormRow:formRowDescriptor];
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.02 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        self.tableView.editing = !self.tableView.editing;
-        self.tableView.editing = !self.tableView.editing;
-    });
     UITableViewCell<XLFormDescriptorCell> * cell = (UITableViewCell<XLFormDescriptorCell> *)[formRowDescriptor cellForFormController:self];
     if ([cell formDescriptorCellCanBecomeFirstResponder]){
         [cell formDescriptorCellBecomeFirstResponder];
@@ -650,11 +646,6 @@
 #pragma GCC diagnostic pop
     // update the accessory view
     [self inputAccessoryViewForRowDescriptor:row];
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.05 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        self.tableView.editing = !self.tableView.editing;
-        self.tableView.editing = !self.tableView.editing;
-    });
-
 }
 
 -(void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
@@ -667,10 +658,6 @@
                 [self.tableView endEditing:YES];
         }
         [multivaluedFormRow.sectionDescriptor removeFormRowAtIndex:indexPath.row];
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.02 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            self.tableView.editing = !self.tableView.editing;
-            self.tableView.editing = !self.tableView.editing;
-        });
         if (firstResponder){
             UITableViewCell<XLFormDescriptorCell> * firstResponderCell = [firstResponder formDescriptorCell];
             XLFormRowDescriptor * rowDescriptor = firstResponderCell.rowDescriptor;
@@ -686,10 +673,6 @@
         else{
             XLFormRowDescriptor * formRowDescriptor = [self formRowFormMultivaluedFormSection:multivaluedFormSection];
             [multivaluedFormSection addFormRow:formRowDescriptor];
-            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.02 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                self.tableView.editing = !self.tableView.editing;
-                self.tableView.editing = !self.tableView.editing;
-            });
             [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:indexPath.row + 1 inSection:indexPath.section] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
             UITableViewCell<XLFormDescriptorCell> * cell = (UITableViewCell<XLFormDescriptorCell> *)[formRowDescriptor cellForFormController:self];
             if ([cell formDescriptorCellCanBecomeFirstResponder]){
